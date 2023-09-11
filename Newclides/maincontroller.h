@@ -33,11 +33,25 @@ private:
     QString identifiedNuclide = "";
 
     int i_massNum  = 0;
-    int i_AtomicMass = 0;
+    int i_Atomic_Number= 0;
     int i_numOfNeutrons = 0;
+    //int i_numOfProtons = 0:
     int i_Count = 117;
+    int modulusManiplualtor = 0;
+    int numberManipulator = 0;
+
+    int p_NumOfHexCanBeBuilt = 0;
+    int p_Remainder = 0;
+
+    int n_NumOfHexCanBeBuilt = 0;
+    int n_Remainder = 0;
+
 
     bool nuclideFound = false;
+    bool oddNumberNeutrons = false;
+    bool oddNumberProtons = false;
+
+
 
 };
 

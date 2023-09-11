@@ -12,490 +12,517 @@ void MainController::selectDirectory(){
     s_SelectedDirectory.clear();
 }
 
-void MainController::buildModel(QString storagePath, QString mass_Num, QString atomic_Mass){
+void MainController::buildModel(QString storagePath, QString mass_Num, QString atomic_number){
     //Get the current date and time
     QDateTime dateTime = dateTime.currentDateTime();
     QString dateTimeString = dateTime.toString("yyyy-MM-dd h:mm:ss ap");
 
     emit buildModelStatusMessage("Build model process started @ " + dateTimeString + "\n");
     confirmedStoragePath = storagePath;
+
+    //Mass Number: The total number of protons and neutrons in a nucleus.
     i_massNum = mass_Num.toInt();
-    i_AtomicMass = atomic_Mass.toInt();
-    i_numOfNeutrons = i_massNum - i_AtomicMass;
+
+    //Atomic Number: The number of protons
+    i_Atomic_Number = atomic_number.toInt();
+
+    //Subtract the number of prontons from the mass number to find the number of neutrons
+    i_numOfNeutrons = i_massNum - i_Atomic_Number;
 
     emit buildModelStatusMessage( "The selected path is: " + confirmedStoragePath);
     emit buildModelStatusMessage( "The mass number is: " + mass_Num);
-    emit buildModelStatusMessage( "The atomic mass is: " + atomic_Mass);
+    emit buildModelStatusMessage( "The atomic number is: " + atomic_number);
+    emit buildModelStatusMessage( "The number of protons is: " + atomic_number);
     emit buildModelStatusMessage( "The number of neutrons is: " + QString::number(i_numOfNeutrons));
 
+    //Check if the number of protons is even or odd
+    if(i_Atomic_Number % 2 == 0){
+        oddNumberProtons = false;
+        emit buildModelStatusMessage( "The number of protons is even");
+    }
+    else if(i_Atomic_Number % 2 != 0){
+        oddNumberProtons = true;
+         emit buildModelStatusMessage( "The number of protons is odd");
+    }
+
+    //Check if the number of neutrons is even or odd
+    if(i_numOfNeutrons % 2 == 0){
+         oddNumberNeutrons = false;
+         emit buildModelStatusMessage( "The number of neutrons is even:");
+    }
+    else if(i_numOfNeutrons % 2 != 0){
+         oddNumberNeutrons = true;
+         emit buildModelStatusMessage( "The number of neutrons is odd:");
+    }
+
     //Find the nuclide by atomic mass number search;
-    i_Count = i_AtomicMass;
+    i_Count = i_Atomic_Number;
     while(nuclideFound == false && i_Count != 117){
-        if(atomic_Mass == "1"){
+        if(atomic_number == "1"){
             identifiedNuclide = "H";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "2"){
+        else if(atomic_number == "2"){
             identifiedNuclide = "He";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "3"){
+        else if(atomic_number == "3"){
             identifiedNuclide = "Li";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "4"){
+        else if(atomic_number == "4"){
             identifiedNuclide = "Be";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "5"){
+        else if(atomic_number == "5"){
             identifiedNuclide = "B";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "6"){
+        else if(atomic_number == "6"){
             identifiedNuclide = "C";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "7"){
+        else if(atomic_number == "7"){
             identifiedNuclide = "N";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "8"){
+        else if(atomic_number == "8"){
             identifiedNuclide = "O";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "9"){
+        else if(atomic_number == "9"){
             identifiedNuclide = "F";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "10"){
+        else if(atomic_number == "10"){
             identifiedNuclide = "Ne";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "11"){
+        else if(atomic_number == "11"){
             identifiedNuclide = "Na";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "12"){
+        else if(atomic_number == "12"){
             identifiedNuclide = "Mg";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "13"){
+        else if(atomic_number == "13"){
             identifiedNuclide = "Al";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "14"){
+        else if(atomic_number == "14"){
             identifiedNuclide = "Si";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "15"){
+        else if(atomic_number == "15"){
             identifiedNuclide = "P";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "16"){
+        else if(atomic_number == "16"){
             identifiedNuclide = "S";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "17"){
+        else if(atomic_number == "17"){
             identifiedNuclide = "Cl";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "18"){
+        else if(atomic_number == "18"){
             identifiedNuclide = "Ar";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "19"){
+        else if(atomic_number == "19"){
             identifiedNuclide = "K";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "20"){
+        else if(atomic_number == "20"){
             identifiedNuclide = "Ca";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "21"){
+        else if(atomic_number == "21"){
             identifiedNuclide = "Sc";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "21"){
+        else if(atomic_number == "21"){
             identifiedNuclide = "Ti";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "23"){
+        else if(atomic_number == "23"){
             identifiedNuclide = "V";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "24"){
+        else if(atomic_number == "24"){
             identifiedNuclide = "Cr";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "25"){
+        else if(atomic_number == "25"){
             identifiedNuclide = "MN";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "26"){
+        else if(atomic_number == "26"){
             identifiedNuclide = "Fe";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "27"){
+        else if(atomic_number == "27"){
             identifiedNuclide = "Co";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "28"){
+        else if(atomic_number == "28"){
             identifiedNuclide = "Ni";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "29"){
+        else if(atomic_number == "29"){
             identifiedNuclide = "Cu";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "30"){
+        else if(atomic_number == "30"){
             identifiedNuclide = "Zn";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "31"){
+        else if(atomic_number == "31"){
             identifiedNuclide = "Ga";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "32"){
+        else if(atomic_number == "32"){
             identifiedNuclide = "Ge";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "33"){
+        else if(atomic_number == "33"){
             identifiedNuclide = "As";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "34"){
+        else if(atomic_number == "34"){
             identifiedNuclide = "Se";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "35"){
+        else if(atomic_number == "35"){
             identifiedNuclide = "Br";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "36"){
+        else if(atomic_number == "36"){
             identifiedNuclide = "Kr";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "37"){
+        else if(atomic_number == "37"){
             identifiedNuclide = "Rb";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "38"){
+        else if(atomic_number == "38"){
             identifiedNuclide = "Sr";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "39"){
+        else if(atomic_number == "39"){
             identifiedNuclide = "Y";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "40"){
+        else if(atomic_number == "40"){
             identifiedNuclide = "Zr";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "41"){
+        else if(atomic_number == "41"){
             identifiedNuclide = "Nb";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "42"){
+        else if(atomic_number == "42"){
             identifiedNuclide = "Mo";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "43"){
+        else if(atomic_number == "43"){
             identifiedNuclide = "Tc";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "44"){
+        else if(atomic_number == "44"){
             identifiedNuclide = "Ru";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "45"){
+        else if(atomic_number == "45"){
             identifiedNuclide = "Rh";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "46"){
+        else if(atomic_number == "46"){
             identifiedNuclide = "Pd";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "47"){
+        else if(atomic_number == "47"){
             identifiedNuclide = "Ag";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "48"){
+        else if(atomic_number == "48"){
             identifiedNuclide = "Cd";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "49"){
+        else if(atomic_number == "49"){
             identifiedNuclide = "In";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "50"){
+        else if(atomic_number == "50"){
             identifiedNuclide = "Sn";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "51"){
+        else if(atomic_number == "51"){
             identifiedNuclide = "Sb";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "52"){
+        else if(atomic_number == "52"){
             identifiedNuclide = "Te";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "53"){
+        else if(atomic_number == "53"){
             identifiedNuclide = "I";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "54"){
+        else if(atomic_number == "54"){
             identifiedNuclide = "Xe";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "55"){
+        else if(atomic_number == "55"){
             identifiedNuclide = "Cs";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "56"){
+        else if(atomic_number == "56"){
             identifiedNuclide = "Ba";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "57"){
+        else if(atomic_number == "57"){
             identifiedNuclide = "La";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "58"){
+        else if(atomic_number == "58"){
             identifiedNuclide = "Ce";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "59"){
+        else if(atomic_number == "59"){
             identifiedNuclide = "Pr";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "60"){
+        else if(atomic_number == "60"){
             identifiedNuclide = "Nd";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "61"){
+        else if(atomic_number == "61"){
             identifiedNuclide = "Pm";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "62"){
+        else if(atomic_number == "62"){
             identifiedNuclide = "Sm";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "63"){
+        else if(atomic_number == "63"){
             identifiedNuclide = "Eu";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "64"){
+        else if(atomic_number == "64"){
             identifiedNuclide = "Gd";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "65"){
+        else if(atomic_number == "65"){
             identifiedNuclide = "Tb";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "66"){
+        else if(atomic_number == "66"){
             identifiedNuclide = "Dy";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "67"){
+        else if(atomic_number == "67"){
             identifiedNuclide = "Ho";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "68"){
+        else if(atomic_number == "68"){
             identifiedNuclide = "Er";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "69"){
+        else if(atomic_number == "69"){
             identifiedNuclide = "Tm";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "70"){
+        else if(atomic_number == "70"){
             identifiedNuclide = "Yb";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "71"){
+        else if(atomic_number == "71"){
             identifiedNuclide = "Lu";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "72"){
+        else if(atomic_number == "72"){
             identifiedNuclide = "Hf";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "73"){
+        else if(atomic_number == "73"){
             identifiedNuclide = "Ta";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "74"){
+        else if(atomic_number == "74"){
             identifiedNuclide = "W";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "75"){
+        else if(atomic_number == "75"){
             identifiedNuclide = "Re";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "76"){
+        else if(atomic_number == "76"){
             identifiedNuclide = "Os";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "77"){
+        else if(atomic_number == "77"){
             identifiedNuclide = "Ir";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "78"){
+        else if(atomic_number == "78"){
             identifiedNuclide = "Pt";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "79"){
+        else if(atomic_number == "79"){
             identifiedNuclide = "Au";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "80"){
+        else if(atomic_number == "80"){
             identifiedNuclide = "Hg";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "81"){
+        else if(atomic_number == "81"){
             identifiedNuclide = "Tl";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "82"){
+        else if(atomic_number == "82"){
             identifiedNuclide = "Pb";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "83"){
+        else if(atomic_number == "83"){
             identifiedNuclide = "Bi";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "84"){
+        else if(atomic_number == "84"){
             identifiedNuclide = "Po";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "85"){
+        else if(atomic_number == "85"){
             identifiedNuclide = "At";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "86"){
+        else if(atomic_number == "86"){
             identifiedNuclide = "Rn";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "87"){
+        else if(atomic_number == "87"){
             identifiedNuclide = "Fr";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "88"){
+        else if(atomic_number == "88"){
             identifiedNuclide = "Ea";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "89"){
+        else if(atomic_number == "89"){
             identifiedNuclide = "Ac";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "90"){
+        else if(atomic_number == "90"){
             identifiedNuclide = "Th";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "91"){
+        else if(atomic_number == "91"){
             identifiedNuclide = "Pa";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "92"){
+        else if(atomic_number == "92"){
             identifiedNuclide = "U";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "93"){
+        else if(atomic_number == "93"){
             identifiedNuclide = "Np";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "94"){
+        else if(atomic_number == "94"){
             identifiedNuclide = "Pu";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "95"){
+        else if(atomic_number == "95"){
             identifiedNuclide = "Am";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "96"){
+        else if(atomic_number == "96"){
             identifiedNuclide = "Cm";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "97"){
+        else if(atomic_number == "97"){
             identifiedNuclide = "Bk";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "98"){
+        else if(atomic_number == "98"){
             identifiedNuclide = "Cf";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "99"){
+        else if(atomic_number == "99"){
             identifiedNuclide = "Es";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "100"){
+        else if(atomic_number == "100"){
             identifiedNuclide = "Fm";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "101"){
+        else if(atomic_number == "101"){
             identifiedNuclide = "Md";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "102"){
+        else if(atomic_number == "102"){
             identifiedNuclide = "No";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "103"){
+        else if(atomic_number == "103"){
             identifiedNuclide = "Lr";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "104"){
+        else if(atomic_number == "104"){
             identifiedNuclide = "Rf";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "105"){
+        else if(atomic_number == "105"){
             identifiedNuclide = "Db";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "106"){
+        else if(atomic_number == "106"){
             identifiedNuclide = "Sg";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "107"){
+        else if(atomic_number == "107"){
             identifiedNuclide = "Bh";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "108"){
+        else if(atomic_number == "108"){
             identifiedNuclide = "Hs";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "109"){
+        else if(atomic_number == "109"){
             identifiedNuclide = "Mt";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "110"){
+        else if(atomic_number == "110"){
             identifiedNuclide = "Ds";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "111"){
+        else if(atomic_number == "111"){
             identifiedNuclide = "Rg";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "112"){
+        else if(atomic_number == "112"){
             identifiedNuclide = "Cn";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "113"){
+        else if(atomic_number == "113"){
             identifiedNuclide = "Nh";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "114"){
+        else if(atomic_number == "114"){
             identifiedNuclide = "Fl";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "115"){
+        else if(atomic_number == "115"){
             identifiedNuclide = "Mc";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "116"){
+        else if(atomic_number == "116"){
             identifiedNuclide = "Lv";
             nuclideFound = true;
         }
-        else if(atomic_Mass == "117"){
+        else if(atomic_number == "117"){
             identifiedNuclide = "TS";
             nuclideFound = true;
         }
@@ -507,5 +534,63 @@ void MainController::buildModel(QString storagePath, QString mass_Num, QString a
     emit buildModelStatusMessage("The nuclide symbol identified is: " + identifiedNuclide);
     emit identifiedNuclideToQml(identifiedNuclide);
     i_Count = 0;
-    identifiedNuclide = "";
+    //identifiedNuclide = "";
+
+    //Calculate how the protons and neutrons can be evnly divided
+    //An odd number divided by an odd number will always be odd.
+    if(oddNumberProtons == true){
+        p_NumOfHexCanBeBuilt = i_Atomic_Number / 3;
+        p_Remainder = i_Atomic_Number % 3;
+        //emit buildModelStatusMessage("Number of protons == Odd");
+        emit buildModelStatusMessage("The number of hexagons that can be built with the provided number of protons is: " + QString::number(p_NumOfHexCanBeBuilt));
+        emit buildModelStatusMessage("The leftover number of protons is: " + QString::number(p_Remainder));
+    }
+    else if(oddNumberProtons == false){
+        p_NumOfHexCanBeBuilt = i_Atomic_Number / 3;
+        p_Remainder = i_Atomic_Number % 3;
+        //emit buildModelStatusMessage("Number of protons == Even");
+        emit buildModelStatusMessage("The number of hexagons that can be built with the provided number of protons is: " + QString::number(p_NumOfHexCanBeBuilt));
+        emit buildModelStatusMessage("The leftover number of protons is: " + QString::number(p_Remainder));
+    }
+
+    if(oddNumberNeutrons == true){
+        n_NumOfHexCanBeBuilt = i_numOfNeutrons / 3;
+        n_Remainder = i_numOfNeutrons % 3;
+        //emit buildModelStatusMessage("Number of neutrons == Odd");
+        emit buildModelStatusMessage("The number of hexagons that can be built with the provided number of neutrons is: " + QString::number(n_NumOfHexCanBeBuilt));
+        emit buildModelStatusMessage("The leftover number of neutrons is: " + QString::number(n_Remainder));
+    }
+    else if(oddNumberNeutrons == false){
+        n_NumOfHexCanBeBuilt = i_numOfNeutrons / 3;
+        n_Remainder = i_numOfNeutrons % 3;
+       // emit buildModelStatusMessage("Number of neutrons = Even");
+        emit buildModelStatusMessage("The number of hexagons that can be built with the provided number of neutrons is: " + QString::number(n_NumOfHexCanBeBuilt));
+        emit buildModelStatusMessage("The leftover number of neutrons is: " + QString::number(n_Remainder));
+    }
+
+    if(n_NumOfHexCanBeBuilt == p_NumOfHexCanBeBuilt){
+        emit buildModelStatusMessage("An equal amount of haxagons can be built for protons and neutrons");
+    }
+    else if(n_NumOfHexCanBeBuilt != p_NumOfHexCanBeBuilt){
+        if(n_NumOfHexCanBeBuilt > p_NumOfHexCanBeBuilt){
+            int temp = n_NumOfHexCanBeBuilt - p_NumOfHexCanBeBuilt;
+            emit buildModelStatusMessage("The number of extra neutron hexagons that can be built is: " + QString::number(temp / 3));
+
+        }
+        else if(n_NumOfHexCanBeBuilt < p_NumOfHexCanBeBuilt){
+            int temp = p_NumOfHexCanBeBuilt - n_NumOfHexCanBeBuilt ;
+            emit buildModelStatusMessage("The number of extra proton hexagons that can be built is: " + QString::number(temp / 3));
+        }
+
+    }
+    else{
+        //Do nothing for now
+    }
+
+    QDateTime f_DateTime = dateTime.currentDateTime();
+    QString f_DateTimeString = dateTime.toString("yyyy-MM-dd h:mm:ss ap");
+
+
+    emit buildModelStatusMessage("Build model process completed @: " + f_DateTimeString);
+
 }

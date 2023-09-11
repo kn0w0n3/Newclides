@@ -29,7 +29,7 @@ Window {
         y: 0
         width: 1280
         height: 720
-        visible: false
+        visible: true
         color: "#000000"
 
         Image {
@@ -393,10 +393,10 @@ Window {
             id: atomicMassLabel
             x: 443
             y: 483
-            width: 72
+            width: 87
             height: 16
             color: "#ffffff"
-            text: qsTr("Atomic mass")
+            text: qsTr("Atomic number")
             font.pixelSize: 12
         }
 
@@ -409,8 +409,9 @@ Window {
         y: 0
         width: 1280
         height: 720
-        visible: true
+        visible: false
         color: "#000000"
+
 
         Image {
             id: image2
@@ -434,11 +435,6 @@ Window {
         }
 
 
-
-
-
-
-
         Image {
             id: upArrow
             x: 616
@@ -450,54 +446,107 @@ Window {
             fillMode: Image.PreserveAspectFit
         }
 
+
+
+
+
         Image {
             id: x1
             x: 598
             y: 285
             width: 30
             height: 30
-            visible: false
-            source: "images/neutron.png"
+            visible: true
+            source: "file:C:/Newclides/images/proton.png"
             fillMode: Image.PreserveAspectFit
         }
+
+
+
+
+
         Image {
             id: x2
             x: 653
             y: 285
             width: 30
             height: 30
-            visible: false
+            visible: true
             source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
+
+
+
         Image {
-            id: x5
-            x: 598
-            y: 381
+            id: x3
+            x: 680
+            y: 333
             width: 30
             height: 30
-            visible: false
-            source: "images/neutron.png"
+            visible: true
+            source: "file:C:/Newclides/images/proton.png"
             fillMode: Image.PreserveAspectFit
         }
+
+
+
         Image {
             id: x4
             x: 653
             y: 381
             width: 30
             height: 30
-            visible: false
+            visible: true
             source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
+
+
+        Image {
+            id: x5
+            x: 598
+            y: 381
+            width: 30
+            height: 30
+            visible: true
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+
+
         Image {
             id: x6
             x: 567
             y: 333
             width: 30
             height: 30
-            visible: false
+            visible: true
             source: "file:C:/Newclides/images/neutron.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+
+        Image {
+            id: x7
+            x: 567
+            y: 254
+            width: 30
+            height: 30
+            visible: true
+            source: "file:C:/Newclides/images/neutron.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x8
+            x: 684
+            y: 254
+            width: 30
+            height: 30
+            visible: true
+            source: "file:C:/Newclides/images/proton.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -507,10 +556,11 @@ Window {
             y: 333
             width: 30
             height: 30
-            visible: false
+            visible: true
             source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
+
 
         Image {
             id: x10
@@ -518,8 +568,8 @@ Window {
             y: 411
             width: 30
             height: 30
-            visible: false
-            source: "images/neutron.png"
+            visible: true
+            source: "file:C:/Newclides/images/proton.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -527,6 +577,39 @@ Window {
             id: x11
             x: 572
             y: 411
+            width: 30
+            height: 30
+            visible: true
+            source: "file:C:/Newclides/images/neutron.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x12
+            x: 525
+            y: 333
+            width: 30
+            height: 30
+            visible: true
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x13
+            x: 541
+            y: 224
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/neutron.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x14
+            x: 710
+            y: 224
             width: 30
             height: 30
             visible: false
@@ -560,6 +643,39 @@ Window {
             id: x17
             x: 546
             y: 441
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/neutron.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x18
+            x: 480
+            y: 333
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/neutron.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x19
+            x: 515
+            y: 194
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/neutron.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x20
+            x: 736
+            y: 194
             width: 30
             height: 30
             visible: false
@@ -743,27 +859,7 @@ Window {
             fillMode: Image.PreserveAspectFit
         }
 
-        Image {
-            id: x18
-            x: 480
-            y: 333
-            width: 30
-            height: 30
-            visible: false
-            source: "file:C:/Newclides/images/neutron.png"
-            fillMode: Image.PreserveAspectFit
-        }
 
-        Image {
-            id: x12
-            x: 525
-            y: 333
-            width: 30
-            height: 30
-            visible: false
-            source: "images/neutron.png"
-            fillMode: Image.PreserveAspectFit
-        }
 
         Image {
             id: x28
@@ -773,16 +869,6 @@ Window {
             height: 30
             visible: false
             source: "file:C:/Newclides/images/neutron.png"
-            fillMode: Image.PreserveAspectFit
-        }
-        Image {
-            id: x3
-            x: 680
-            y: 333
-            width: 30
-            height: 30
-            visible: false
-            source: "images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -859,7 +945,7 @@ Window {
             width: 30
             height: 30
             visible: false
-            source: "images/neutron.png"
+            source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -973,38 +1059,8 @@ Window {
             fillMode: Image.PreserveAspectFit
         }
 
-        Image {
-            id: x19
-            x: 515
-            y: 194
-            width: 30
-            height: 30
-            visible: false
-            source: "file:C:/Newclides/images/neutron.png"
-            fillMode: Image.PreserveAspectFit
-        }
 
-        Image {
-            id: x13
-            x: 541
-            y: 224
-            width: 30
-            height: 30
-            visible: false
-            source: "file:C:/Newclides/images/neutron.png"
-            fillMode: Image.PreserveAspectFit
-        }
 
-        Image {
-            id: x7
-            x: 567
-            y: 254
-            width: 30
-            height: 30
-            visible: false
-            source: "file:C:/Newclides/images/neutron.png"
-            fillMode: Image.PreserveAspectFit
-        }
 
         Image {
             id: x56
@@ -1057,7 +1113,7 @@ Window {
             width: 30
             height: 30
             visible: false
-            source: "images/neutron.png"
+            source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -1072,38 +1128,8 @@ Window {
             fillMode: Image.PreserveAspectFit
         }
 
-        Image {
-            id: x20
-            x: 736
-            y: 194
-            width: 30
-            height: 30
-            visible: false
-            source: "file:C:/Newclides/images/neutron.png"
-            fillMode: Image.PreserveAspectFit
-        }
 
-        Image {
-            id: x14
-            x: 710
-            y: 224
-            width: 30
-            height: 30
-            visible: false
-            source: "file:C:/Newclides/images/neutron.png"
-            fillMode: Image.PreserveAspectFit
-        }
 
-        Image {
-            id: x8
-            x: 684
-            y: 254
-            width: 30
-            height: 30
-            visible: false
-            source: "images/neutron.png"
-            fillMode: Image.PreserveAspectFit
-        }
 
         Label {
             id: identifiedNuclideLabel
