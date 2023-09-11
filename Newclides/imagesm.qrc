@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/neutron.png</file>
+        <file>images/proton.png</file>
+        <file>images/down_arrow.png</file>
+        <file>images/up_arrow.png</file>
+        <file>images/logoB.png</file>
+        <file>images/bg.png</file>
+        <file>images/bg2.png</file>
+        <file>images/logo2.png</file>
+        <file>images/mainText.png</file>
+        <file>images/selectDirBtn.png</file>
+        <file>images/startBtn2.png</file>
+        <file>images/homeBtn.png</file>
+        <file>images/viewerBtn.png</file>
+        <file>images/GmenuClose.png</file>
+        <file>images/GopenMenuDots.png</file>
+    </qresource>
+</RCC>
