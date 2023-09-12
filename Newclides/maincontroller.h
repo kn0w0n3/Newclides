@@ -84,6 +84,8 @@ private:
     QString x6 = "";
 
     QStringList modelFilesList;
+    QStringList nuclideSymbolList;
+    QStringList nuclideNameList;
     QString selectedFile = "";
 };
 
