@@ -1,5 +1,5 @@
 # Newclides
-Model building for nuclides - Nuclear Physics
+Nuclide Modeling - Nuclear Physics
 
 ![newclides_gui_9-11-23_4MB](https://github.com/kn0w0n3/Newclides/assets/22214754/ea4c7c6e-3cf2-4b66-8017-53469d15e458)     
 
