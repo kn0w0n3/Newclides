@@ -63,18 +63,18 @@ void MainController::buildModel(QString storagePath, QString mass_Num, QString a
     }
 
 
-    nuclideSymbolList = { "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne",
-                          "Na","Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K","Ca",
-                          "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn",
-                          "Ga", "Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr",
-                          "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn",
-                          "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd",
-                          "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb",
-                          "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg",
-                          "Ti", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th",
-                          "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm",
-                          "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds",
-                          "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"};
+    nuclideSymbolList = {"H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne",
+                         "Na","Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K","Ca",
+                         "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn",
+                         "Ga", "Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr",
+                         "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn",
+                         "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd",
+                         "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb",
+                         "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg",
+                         "Ti", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th",
+                         "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm",
+                         "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds",
+                         "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"};
 
     nuclideNameList = {"Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", "Carbon", "Nitrogen", "Oxygen", "Fluorine", "Neon",
                        "Sodium", "Magnesium", "Aluminum", "Silicon", "Phosphorus", "Sulfur", "Chlorine", "Argon", "Potassium","Calcium",
@@ -89,16 +89,9 @@ void MainController::buildModel(QString storagePath, QString mass_Num, QString a
                        "Nobelium", "Lawrencium", "Rutherfordium", "Dubnium", "Seaborgium", "Bohrium", "Hassium", "Meitnerium", "Darmstadtium", "Roentgenium",
                        "Copernicium", "Nihonium", "Flerovium", "Moscovium", "Livermorium", "Tennessine", "Oganesson"};
 
-    //Find the nuclide by atomic number search;
-    i_Count = i_Atomic_Number;      
-    while(nuclideFound == false && i_Count != 118){
-         if(atomic_number.toInt() == i_Count){
-            identifiedNuclide = nuclideSymbolList.at(i_Count + 1);
-            nuclideFound = true;
-            qDebug() << "The identified nuclide is: " + identifiedNuclide;
-        }      
-        i_Count++;
-    }
+
+    identifiedNuclide = nuclideSymbolList.at(i_Atomic_Number - 1);
+
 
     emit buildModelStatusMessage("The nuclide symbol identified is: " + identifiedNuclide);
     emit identifiedNuclideToQml(identifiedNuclide);
