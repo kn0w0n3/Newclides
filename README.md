@@ -5,6 +5,8 @@ Model building for nuclides - Nuclear Physics
 
 ![4](https://github.com/kn0w0n3/Newclides/assets/22214754/e110230f-fbbb-4916-b47d-04ca73e6e505)  
 
+![2](https://github.com/kn0w0n3/Newclides/assets/22214754/ac9f4712-25f3-4d8d-80fb-e5efcf900a28)  
+
 Newclides: A new way to model the the nucleus...  
 
 # **Resources:**  
