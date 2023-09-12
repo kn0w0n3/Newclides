@@ -15,5 +15,9 @@
         <file>images/viewerBtn.png</file>
         <file>images/GmenuClose.png</file>
         <file>images/GopenMenuDots.png</file>
+        <file>images/loadBtn.png</file>
+        <file>images/arrowRightBtn.png</file>
+        <file>images/leftArrowBtn.png</file>
+        <file>images/closeBtn.png</file>
     </qresource>
 </RCC>

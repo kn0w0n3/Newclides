@@ -18,10 +18,96 @@ Window {
             mainWinTextArea.text += buildModelMessage + "\n"
         }
         onIdentifiedNuclideToQml:{
-            identifiedNuclideLabel.text = identifiedNuclide_
+            idNuclideTxtLabel.text = identifiedNuclide_
+        }
+        onModelDirPathToQml:{
+            modelDirTxtEdit.text = _modelDir
+        }
+        onLoadModelNuclideId:{
+            idNuclideLabel.visible = true
+            idNuclideTxtLabel.visible = true
+            idNuclideTxtLabel.text = nuclideId
+        }
+        onModelStepNumber:{
+            stepLabel.visible = true
+            stepTxtLabel.visible = true
+            stepTxtLabel.text = _stepNumber
+        }
+        onModelStepSpin:{
+            if(_spin === "up"){
+                upArrow.visible = true
+                levelLebelTxtNum.text = "-1"
+                levelLebelTxtNum.visible = true
+                downArrow.visible = false
+            }
+            else if(_spin === "down"){
+                upArrow.visible = false
+                levelLebelTxtNum.text = "+1"
+                levelLebelTxtNum.visible = true
+                downArrow.visible = true
+            }
+        }
+        onX1ToQml:{
+            if(x1Val === "N"){
+                x1.visible = true
+                x61.visible = false
+            }
+            else if(x1Val === "P"){
+                x61.visible = true
+                x1.visible = false
+            }
+        }
+        onX2ToQml:{
+            if(x2Val === "N"){
+                x2.visible = true
+                x62.visible = false
+            }
+            else if(x2Val === "P"){
+                x62.visible = true
+                x2.visible = false
+            }
+        }
+        onX3ToQml:{
+            if(x3Val === "N"){
+                x3.visible = true
+                x63.visible = false
+            }
+            else if(x3Val === "P"){
+                x63.visible = true
+                x3.visible = false
+            }
+        }
+        onX4ToQml:{
+            if(x4Val === "N"){
+                x4.visible = true
+                x64.visible = false
+            }
+            else if(x4Val === "P"){
+                x64.visible = true
+                x4.visible = false
+            }
+        }
+        onX5ToQml:{
+            if(x5Val === "N"){
+                x5.visible = true
+                x65.visible = false
+            }
+            else if(x5Val === "P"){
+                x65.visible = true
+                x5.visible = false
+            }
+        }
+        onX6ToQml:{
+            if(x6Val === "N"){
+                x6.visible = true
+                x66.visible = false
+            }
+            else if(x1Val === "P"){
+                x66.visible = true
+                x6.visible = false
+            }
         }
     }
-
 
     Rectangle {
         id: mainWin
@@ -422,22 +508,37 @@ Window {
             source: "file:C:/Newclides/images/bg.png"
             fillMode: Image.PreserveAspectFit
 
-            Text {
-                id: text3
-                x: 1063
-                y: 55
-                width: 58
+            Label {
+                id: stepLabel
+                x: 599
+                y: 498
+                width: 49
                 height: 33
+                visible: false
                 color: "#ffffff"
                 text: qsTr("Step:")
-                font.pixelSize: 23
+                font.bold: false
+                font.pointSize: 17
+            }
+
+            Label {
+                id: stepTxtLabel
+                x: 658
+                y: 500
+                width: 82
+                height: 33
+                visible: false
+                color: "#ffffff"
+                text: qsTr("")
+                font.bold: false
+                font.pointSize: 17
             }
         }
 
 
         Image {
             id: upArrow
-            x: 616
+            x: 613
             y: 326
             width: 49
             height: 49
@@ -456,8 +557,8 @@ Window {
             y: 285
             width: 30
             height: 30
-            visible: true
-            source: "file:C:/Newclides/images/proton.png"
+            visible: false
+            source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -471,7 +572,7 @@ Window {
             y: 285
             width: 30
             height: 30
-            visible: true
+            visible: false
             source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -484,7 +585,7 @@ Window {
             y: 333
             width: 30
             height: 30
-            visible: true
+            visible: false
             source: "file:C:/Newclides/images/proton.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -497,7 +598,7 @@ Window {
             y: 381
             width: 30
             height: 30
-            visible: true
+            visible: false
             source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -509,7 +610,7 @@ Window {
             y: 381
             width: 30
             height: 30
-            visible: true
+            visible: false
             source: "file:C:/Newclides/images/proton.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -522,7 +623,7 @@ Window {
             y: 333
             width: 30
             height: 30
-            visible: true
+            visible: false
             source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -534,7 +635,7 @@ Window {
             y: 254
             width: 30
             height: 30
-            visible: true
+            visible: false
             source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -545,8 +646,8 @@ Window {
             y: 254
             width: 30
             height: 30
-            visible: true
-            source: "file:C:/Newclides/images/proton.png"
+            visible: false
+            source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -556,7 +657,7 @@ Window {
             y: 333
             width: 30
             height: 30
-            visible: true
+            visible: false
             source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -568,8 +669,8 @@ Window {
             y: 411
             width: 30
             height: 30
-            visible: true
-            source: "file:C:/Newclides/images/proton.png"
+            visible: false
+            source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -579,7 +680,7 @@ Window {
             y: 411
             width: 30
             height: 30
-            visible: true
+            visible: false
             source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
@@ -590,8 +691,8 @@ Window {
             y: 333
             width: 30
             height: 30
-            visible: true
-            source: "file:C:/Newclides/images/proton.png"
+            visible: false
+            source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -1132,15 +1233,851 @@ Window {
 
 
         Label {
-            id: identifiedNuclideLabel
-            x: 1062
-            y: 15
-            width: 185
-            height: 44
+            id: idNuclideTxtLabel
+            x: 1170
+            y: 21
+            width: 102
+            height: 33
             color: "#ffffff"
             text: qsTr("")
             font.bold: true
-            font.pointSize: 21
+            font.pointSize: 19
+        }
+
+        Image {
+            id: x61
+            x: 598
+            y: 285
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x62
+            x: 650
+            y: 282
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x63
+            x: 677
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x64
+            x: 650
+            y: 378
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x65
+            x: 595
+            y: 378
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x66
+            x: 564
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x67
+            x: 564
+            y: 251
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x68
+            x: 681
+            y: 251
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x69
+            x: 723
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x70
+            x: 676
+            y: 408
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x71
+            x: 569
+            y: 408
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x72
+            x: 522
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x73
+            x: 538
+            y: 221
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x74
+            x: 707
+            y: 221
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x75
+            x: 766
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x76
+            x: 702
+            y: 438
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x77
+            x: 543
+            y: 438
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x78
+            x: 477
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x79
+            x: 512
+            y: 191
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x80
+            x: 733
+            y: 191
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x81
+            x: 810
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x82
+            x: 517
+            y: 468
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x83
+            x: 729
+            y: 468
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x84
+            x: 855
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x85
+            x: 900
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x86
+            x: 944
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x87
+            x: 988
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/neutron.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x88
+            x: 1032
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/neutron.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x89
+            x: 1077
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x90
+            x: 168
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x91
+            x: 211
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/neutron.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x92
+            x: 255
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x93
+            x: 300
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x94
+            x: 345
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x95
+            x: 389
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x96
+            x: 433
+            y: 330
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x97
+            x: 755
+            y: 498
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x98
+            x: 781
+            y: 528
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x99
+            x: 807
+            y: 558
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x100
+            x: 833
+            y: 588
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x101
+            x: 859
+            y: 618
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/neutron.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x102
+            x: 885
+            y: 648
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x103
+            x: 491
+            y: 498
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x104
+            x: 467
+            y: 527
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x105
+            x: 441
+            y: 557
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x106
+            x: 415
+            y: 587
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x107
+            x: 389
+            y: 617
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x108
+            x: 363
+            y: 647
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x109
+            x: 355
+            y: 11
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x110
+            x: 381
+            y: 41
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x111
+            x: 408
+            y: 71
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x112
+            x: 434
+            y: 101
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x113
+            x: 460
+            y: 131
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x114
+            x: 486
+            y: 161
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x115
+            x: 887
+            y: 12
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x116
+            x: 861
+            y: 42
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x117
+            x: 835
+            y: 72
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x118
+            x: 809
+            y: 102
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x119
+            x: 785
+            y: 131
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: x120
+            x: 759
+            y: 161
+            width: 30
+            height: 30
+            visible: false
+            source: "file:C:/Newclides/images/proton.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: downArrow
+            x: 615
+            y: 335
+            width: 49
+            height: 49
+            visible: false
+            source: "file:C:/Newclides/images/up_arrow.png"
+            rotation: -179.649
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Label {
+            id: idNuclideLabel
+            x: 969
+            y: 21
+            width: 190
+            height: 33
+            visible: true
+            color: "#ffffff"
+            text: qsTr("Identified Nuclide:")
+            font.pointSize: 17
+        }
+
+        Image {
+            id: selectModelDirBtn
+            x: 231
+            y: 588
+            width: 78
+            height: 24
+            source: "file:C:/Newclides/images/selectDirBtn.png"
+            MouseArea {
+                id: selectModelDirMouseArea
+                width: 78
+                height: 24
+                onClicked: {
+                    mainController.selectModelDirectory()
+                }
+            }
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Rectangle {
+            id: modelDirPathRect
+            x: 322
+            y: 589
+            width: 662
+            height: 22
+            color: "#000000"
+            border.color: "#ffffff"
+            TextEdit {
+                id: modelDirTxtEdit
+                x: 2
+                y: 2
+                width: 658
+                height: 18
+                color: "#ffffff"
+                text: qsTr("")
+                font.pixelSize: 12
+            }
+        }
+
+        Image {
+            id: leftArrowBtn
+            x: 415
+            y: 504
+            width: 78
+            height: 24
+            source: "file:C:/Newclides/images/leftArrowBtn.png"
+            MouseArea {
+                id: leftArrowMouseArea
+                width: 78
+                height: 24
+                onClicked: {
+                    //mainController.selectModelDirectory()
+                }
+            }
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Image {
+            id: rightArrowBtn
+            x: 809
+            y: 504
+            width: 78
+            height: 24
+            source: "file:C:/Newclides/images/arrowRightBtn.png"
+            MouseArea {
+                id: rightArrowMouseArea
+                width: 78
+                height: 24
+                onClicked: {
+                    //mainController.selectModelDirectory()
+                }
+            }
+            fillMode: Image.PreserveAspectFit
+        }
+
+        Label {
+            id: levelLabel
+            x: 423
+            y: 81
+            width: 62
+            height: 37
+            color: "#ffffff"
+            text: qsTr("Level")
+            font.bold: false
+            font.pointSize: 20
+        }
+
+        Label {
+            id: spinLabel
+            x: 821
+            y: 81
+            width: 55
+            height: 37
+            color: "#ffffff"
+            text: qsTr("Spin")
+            font.bold: false
+            font.pointSize: 20
+        }
+
+        Label {
+            id: levelLebelTxtNum
+            x: 431
+            y: 336
+            width: 35
+            height: 29
+            visible: false
+            color: "#ffffff"
+            text: qsTr("-1")
+            font.pointSize: 20
+        }
+
+        Image {
+            id: loadModelBtn
+            x: 323
+            y: 621
+            width: 78
+            height: 24
+            source: "file:C:/Newclides/images/loadBtn.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        MouseArea {
+            id: loadModelMouseArea
+            x: 323
+            y: 621
+            width: 78
+            height: 24
+            onClicked: {
+                mainController.loadModelData(modelDirTxtEdit.text)
+            }
+        }
+
+        Image {
+            id: closeModelBtn
+            x: 910
+            y: 621
+            width: 78
+            height: 24
+            source: "file:C:/Newclides/images/closeBtn.png"
+            fillMode: Image.PreserveAspectFit
+        }
+
+        MouseArea {
+            id: closeModelBtnMouseArea
+            x: 910
+            y: 621
+            width: 78
+            height: 24
+            onClicked: {
+                //close the model
+            }
         }
     }
 
