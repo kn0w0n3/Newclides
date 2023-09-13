@@ -1,7 +1,7 @@
 # Newclides
 Nuclide Modeling - Nuclear Physics
 
-![newclides_gui_9-11-23_4MB](https://github.com/kn0w0n3/Newclides/assets/22214754/ea4c7c6e-3cf2-4b66-8017-53469d15e458)     
+![newclides_gui_9-12-23_4MB](https://github.com/kn0w0n3/Newclides/assets/22214754/2b1c8159-e4b3-4bd2-be87-9616d96f3281)      
 
 ![1](https://github.com/kn0w0n3/Newclides/assets/22214754/a3beba4c-b2a5-4e0c-916f-bf3a3b0fbc71)  
 
