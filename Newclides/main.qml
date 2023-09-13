@@ -47,6 +47,11 @@ Window {
                 downArrow.visible = true
             }
         }
+        onIdNuclideNameToQml:{
+            nuclideNameLabel.visible = true
+            nuclideNameLabel.text = idNuclideName
+        }
+
         onX1ToQml:{
             if(x1Val === "N"){
                 console.log("Recieving new model data x1.........." + x1Val)
@@ -2123,6 +2128,18 @@ Window {
                 //x67.visible = false; x68.visible = false; x69.visible = false; x70.visible = false; x71.visible = false; x72.visible = false;
                 mainController.clearLoadedModelFileList()
             }
+        }
+
+        Label {
+            id: nuclideNameLabel
+            x: 1170
+            y: 66
+            width: 168
+            height: 35
+            visible: false
+            color: "#ffffff"
+            text: qsTr("")
+            font.pointSize: 14
         }
     }
 
