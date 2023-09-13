@@ -41,6 +41,8 @@ public slots:
     void buildModel(QString, QString, QString);
     void saveModelBuildDataToFile(QString, QString, QString, QString, QString, QString, QString, QString);
     void loadModelData(QString);
+    void modelViewerStepControl(QString, QString);
+    void clearLoadedModelFileList();
 
 private:
     QString s_SelectedDirectory = "";

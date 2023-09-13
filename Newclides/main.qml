@@ -49,60 +49,73 @@ Window {
         }
         onX1ToQml:{
             if(x1Val === "N"){
+                console.log("Recieving new model data x1.........." + x1Val)
                 x1.visible = true
                 x61.visible = false
             }
             else if(x1Val === "P"){
-                x61.visible = true
+                console.log("Recieving new model data x1.........." + x1Val)
                 x1.visible = false
+                x61.visible = true                
             }
         }
         onX2ToQml:{
             if(x2Val === "N"){
+                console.log("Recieving new model data x2.........." + x2Val)
                 x2.visible = true
                 x62.visible = false
             }
             else if(x2Val === "P"){
-                x62.visible = true
+                console.log("Recieving new model data x2.........." + x2Val)
+
                 x2.visible = false
+                x62.visible = true
             }
         }
         onX3ToQml:{
             if(x3Val === "N"){
+                console.log("Recieving new model data x3.........." + x3Val)
                 x3.visible = true
                 x63.visible = false
             }
             else if(x3Val === "P"){
+                console.log("Recieving new model data x3.........." + x3Val)
                 x63.visible = true
                 x3.visible = false
             }
         }
         onX4ToQml:{
             if(x4Val === "N"){
+                console.log("Recieving new model data x4.........." + x4Val)
                 x4.visible = true
                 x64.visible = false
             }
             else if(x4Val === "P"){
+                console.log("Recieving new model data x4.........." + x4Val)
                 x64.visible = true
                 x4.visible = false
             }
         }
         onX5ToQml:{
             if(x5Val === "N"){
+                console.log("Recieving new model data x5........" + x5Val)
                 x5.visible = true
                 x65.visible = false
             }
             else if(x5Val === "P"){
+                console.log("Recieving new model data x5........" + x5Val)
                 x65.visible = true
                 x5.visible = false
             }
         }
         onX6ToQml:{
             if(x6Val === "N"){
+                console.log("Recieving new model data x6........" + x6Val)
                 x6.visible = true
                 x66.visible = false
             }
-            else if(x1Val === "P"){
+            else if(x6Val === "P"){
+                console.log("Recieving new model data x6........" + x6Val)
                 x66.visible = true
                 x6.visible = false
             }
@@ -115,7 +128,7 @@ Window {
         y: 0
         width: 1280
         height: 720
-        visible: true
+        visible: false
         color: "#000000"
 
         Image {
@@ -495,7 +508,7 @@ Window {
         y: 0
         width: 1280
         height: 720
-        visible: false
+        visible: true
         color: "#000000"
 
 
@@ -586,7 +599,7 @@ Window {
             width: 30
             height: 30
             visible: false
-            source: "file:C:/Newclides/images/proton.png"
+            source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -611,7 +624,7 @@ Window {
             width: 30
             height: 30
             visible: false
-            source: "file:C:/Newclides/images/proton.png"
+            source: "file:C:/Newclides/images/neutron.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -1537,7 +1550,7 @@ Window {
             width: 30
             height: 30
             visible: false
-            source: "file:C:/Newclides/images/neutron.png"
+            source: "file:C:/Newclides/images/proton.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -1548,7 +1561,7 @@ Window {
             width: 30
             height: 30
             visible: false
-            source: "file:C:/Newclides/images/neutron.png"
+            source: "file:C:/Newclides/images/proton.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -1581,7 +1594,7 @@ Window {
             width: 30
             height: 30
             visible: false
-            source: "file:C:/Newclides/images/neutron.png"
+            source: "file:C:/Newclides/images/proton.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -1691,7 +1704,7 @@ Window {
             width: 30
             height: 30
             visible: false
-            source: "file:C:/Newclides/images/neutron.png"
+            source: "file:C:/Newclides/images/proton.png"
             fillMode: Image.PreserveAspectFit
         }
 
@@ -1907,7 +1920,7 @@ Window {
         Image {
             id: downArrow
             x: 615
-            y: 335
+            y: 325
             width: 49
             height: 49
             visible: false
@@ -1978,7 +1991,22 @@ Window {
                 width: 78
                 height: 24
                 onClicked: {
-                    //mainController.selectModelDirectory()
+                    if(stepTxtLabel.text === "1"){
+
+                    }
+                    else{
+                        console.log("2The lable text is " + stepTxtLabel.text)
+
+                        console.log("2The lable text is now" + stepTxtLabel.text)
+                        mainController.modelViewerStepControl(stepTxtLabel.text, "L")
+                        //upArrow.visible = false;
+                        //downArrow.visible = false;
+                        //x1.visible = false; x2.visible = false; x3.visible = false; x4.visible = false; x5.visible = false; x6.visible = false;
+                        //x7.visible = false; x8.visible = false; x9.visible = false; x10.visible = false; x11.visible = false; x12.visible = false;
+
+                        //x61.visible = false; x62.visible = false; x63.visible = false; x64.visible = false; x65.visible = false; x66.visible = false;
+                        //x67.visible = false; x68.visible = false; x69.visible = false; x70.visible = false; x71.visible = false; x72.visible = false;
+                    }
                 }
             }
             fillMode: Image.PreserveAspectFit
@@ -1996,7 +2024,18 @@ Window {
                 width: 78
                 height: 24
                 onClicked: {
-                    //mainController.selectModelDirectory()
+                    console.log("The lable text is " + stepTxtLabel.text)
+
+                    console.log("The lable text is now " + stepTxtLabel.text)
+                    mainController.modelViewerStepControl(stepTxtLabel.text, "R")
+                    //change model step
+                   // upArrow.visible = false;
+                   // downArrow.visible = false;
+                    //x1.visible = false; x2.visible = false; x3.visible = false; x4.visible = false; x5.visible = false; x6.visible = false;
+                    //x7.visible = false; x8.visible = false; x9.visible = false; x10.visible = false; x11.visible = false; x12.visible = false;
+
+                    //x61.visible = false; x62.visible = false; x63.visible = false; x64.visible = false; x65.visible = false; x66.visible = false;
+                    //x67.visible = false; x68.visible = false; x69.visible = false; x70.visible = false; x71.visible = false; x72.visible = false;
                 }
             }
             fillMode: Image.PreserveAspectFit
@@ -2077,6 +2116,12 @@ Window {
             height: 24
             onClicked: {
                 //close the model
+                //x1.visible = false; x2.visible = false; x3.visible = false; x4.visible = false; x5.visible = false; x6.visible = false;
+                //x7.visible = false; x8.visible = false; x9.visible = false; x10.visible = false; x11.visible = false; x12.visible = false;
+
+                //x61.visible = false; x62.visible = false; x63.visible = false; x64.visible = false; x65.visible = false; x66.visible = false;
+                //x67.visible = false; x68.visible = false; x69.visible = false; x70.visible = false; x71.visible = false; x72.visible = false;
+                mainController.clearLoadedModelFileList()
             }
         }
     }

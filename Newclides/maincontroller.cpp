@@ -62,7 +62,6 @@ void MainController::buildModel(QString storagePath, QString mass_Num, QString a
          emit buildModelStatusMessage( "The number of neutrons is odd:");
     }
 
-
     nuclideSymbolList = {"H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne",
                          "Na","Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K","Ca",
                          "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn",
@@ -91,14 +90,10 @@ void MainController::buildModel(QString storagePath, QString mass_Num, QString a
 
 
     identifiedNuclide = nuclideSymbolList.at(i_Atomic_Number - 1);
-
-
     emit buildModelStatusMessage("The nuclide symbol identified is: " + identifiedNuclide);
-    emit identifiedNuclideToQml(identifiedNuclide);
-    i_Count = 0;
-    //identifiedNuclide = "";
+    //emit identifiedNuclideToQml(identifiedNuclide);
 
-    //Calculate how the protons and neutrons can be evnly divided
+    //Calculate how the protons and neutrons can be evenly divided
     //An odd number divided by an odd number will always be odd.
     if(oddNumberProtons == true){
         p_NumOfHexCanBeBuilt = i_Atomic_Number / 3;
@@ -273,4 +268,63 @@ void MainController::loadModelData(QString dataLocation){
         fileLineCounter++;
     }
     sFile.close();
+    fileLineCounter = 0;
+}
+
+void MainController::modelViewerStepControl(QString stepNum, QString direction){
+
+    int tempInt = stepNum.toInt() - 1;
+    if(direction == "R"){
+        selectedFile = modelFilesList.at(tempInt + 1);
+    }
+    else if(direction == "L"){
+        selectedFile = modelFilesList.at(tempInt - 1);
+    }
+
+    qDebug() << "The selected file is: " + selectedFile;
+    QFile sFile(selectedFile);
+    if(!sFile.open(QIODevice::ReadOnly)){
+        //error
+    }
+    QTextStream in(&sFile);
+    while (!in.atEnd()){
+        //openFileForView = in.readAll().trimmed();
+        //qDebug() << "The model file line data is: " + in.readLine().trimmed();
+        QString tempLineRead = in.readLine().trimmed();
+        //qDebug() << "The line read data is: " + in.readLine().trimmed();
+        //emit step number
+        if(fileLineCounter == 0){
+           emit modelStepNumber(tempLineRead);
+        }
+        //emit spin
+        else if(fileLineCounter == 1){
+           //qDebug() <<"Emitting new model data................";
+           emit modelStepSpin(tempLineRead);
+        }
+        else if(fileLineCounter == 2){
+           emit x1ToQml(tempLineRead);
+        }
+        else if(fileLineCounter == 3){
+           emit x2ToQml(tempLineRead);
+        }
+        else if(fileLineCounter == 4){
+           emit x3ToQml(tempLineRead);
+        }
+        else if(fileLineCounter == 5){
+           emit x4ToQml(tempLineRead);
+        }
+        else if(fileLineCounter == 6){
+           emit x5ToQml(tempLineRead);
+        }
+        else if(fileLineCounter == 7){
+           emit x6ToQml(tempLineRead);
+        }
+        fileLineCounter++;
+    }
+    sFile.close();
+    fileLineCounter = 0;
+}
+
+void MainController::clearLoadedModelFileList(){
+    modelFilesList.clear();
 }
