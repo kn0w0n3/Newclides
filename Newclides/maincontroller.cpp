@@ -199,7 +199,7 @@ void MainController::loadModelData(QString dataLocation){
     auto parts2 = tempModelNameGetter.split(u'-');
     QString tempModelNameGetter2 = parts2.at(0).trimmed();
     qDebug() << "The part is: " + tempModelNameGetter2;
-    int nameArrayNumToGet = nuclideSymbolList.indexOf("C");
+    int nameArrayNumToGet = nuclideSymbolList.indexOf(tempModelNameGetter2);
     qDebug() << "The index of functions returns: " +  QString::number(nuclideSymbolList.indexOf(tempModelNameGetter2));
      QString tempnuclideName = nuclideNameList.at(nameArrayNumToGet);
     emit idNuclideNameToQml(tempnuclideName);

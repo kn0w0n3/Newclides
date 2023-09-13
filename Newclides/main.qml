@@ -2121,11 +2121,19 @@ Window {
             height: 24
             onClicked: {
                 //close the model
-                //x1.visible = false; x2.visible = false; x3.visible = false; x4.visible = false; x5.visible = false; x6.visible = false;
-                //x7.visible = false; x8.visible = false; x9.visible = false; x10.visible = false; x11.visible = false; x12.visible = false;
+                upArrow.visible =false;
+                downArrow.visible = false;
+                idNuclideTxtLabel.visible = false;
+                nuclideNameLabel.visible = false;
+                stepLabel.visible = false;
+                stepTxtLabel.visible = false;
+                levelLebelTxtNum.visible = false;
 
-                //x61.visible = false; x62.visible = false; x63.visible = false; x64.visible = false; x65.visible = false; x66.visible = false;
-                //x67.visible = false; x68.visible = false; x69.visible = false; x70.visible = false; x71.visible = false; x72.visible = false;
+                x1.visible = false; x2.visible = false; x3.visible = false; x4.visible = false; x5.visible = false; x6.visible = false;
+                x7.visible = false; x8.visible = false; x9.visible = false; x10.visible = false; x11.visible = false; x12.visible = false;
+
+                x61.visible = false; x62.visible = false; x63.visible = false; x64.visible = false; x65.visible = false; x66.visible = false;
+                x67.visible = false; x68.visible = false; x69.visible = false; x70.visible = false; x71.visible = false; x72.visible = false;
                 mainController.clearLoadedModelFileList()
             }
         }
