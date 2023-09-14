@@ -4,7 +4,6 @@ MainController::MainController(QWidget *parent) : QWidget(parent){
 
 }
 
-//Select directory for storage of databases - future implementation
 void MainController::selectDirectory(){
     QString dir = QFileDialog::getExistingDirectory(Q_NULLPTR, tr("Select Directory"), "/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     s_SelectedDirectory = dir.trimmed();
@@ -19,12 +18,14 @@ void MainController::selectModelDirectory(){
     s_SelectedModelDir.clear();
 }
 
+//Build newclide models
 void MainController::buildModel(QString storagePath, QString mass_Num, QString atomic_number){
     //Get the current date and time
     QDateTime dateTime = dateTime.currentDateTime();
     QString dateTimeString = dateTime.toString("yyyy-MM-dd h:mm:ss ap");
-
     emit buildModelStatusMessage("Build model process started @ " + dateTimeString + "\n");
+
+    //Get the provided storage path
     confirmedStoragePath = storagePath;
 
     //Mass Number: The total number of protons and neutrons in a nucleus.
@@ -36,143 +37,124 @@ void MainController::buildModel(QString storagePath, QString mass_Num, QString a
     //Subtract the number of prontons from the mass number to find the number of neutrons
     i_numOfNeutrons = i_massNum - i_Atomic_Number;
 
-    emit buildModelStatusMessage( "The selected path is: " + confirmedStoragePath);
-    emit buildModelStatusMessage( "The mass number is: " + mass_Num);
-    emit buildModelStatusMessage( "The atomic number is: " + atomic_number);
+    //Display a message about the number of protons and neutrons
     emit buildModelStatusMessage( "The number of protons is: " + atomic_number);
     emit buildModelStatusMessage( "The number of neutrons is: " + QString::number(i_numOfNeutrons));
 
-    //Check if the number of protons is even or odd
-    if(i_Atomic_Number % 2 == 0){
-        oddNumberProtons = false;
-        emit buildModelStatusMessage( "The number of protons is even");
-    }
-    else if(i_Atomic_Number % 2 != 0){
-        oddNumberProtons = true;
-         emit buildModelStatusMessage( "The number of protons is odd");
-    }
-
-    //Check if the number of neutrons is even or odd
-    if(i_numOfNeutrons % 2 == 0){
-         oddNumberNeutrons = false;
-         emit buildModelStatusMessage( "The number of neutrons is even:");
-    }
-    else if(i_numOfNeutrons % 2 != 0){
-         oddNumberNeutrons = true;
-         emit buildModelStatusMessage( "The number of neutrons is odd:");
-    }
-
-
+    //Get the nuclide symbol. This will be used for the file name
     identifiedNuclide = nuclideSymbolList.at(i_Atomic_Number - 1);
-
     emit buildModelStatusMessage("The nuclide symbol identified is: " + identifiedNuclide);
-    //emit identifiedNuclideToQml(identifiedNuclide);
 
-    //Calculate how the protons and neutrons can be evenly divided
-    //An odd number divided by an odd number will always be odd.
-    if(oddNumberProtons == true){
-        p_NumOfHexCanBeBuilt = i_Atomic_Number / 3;
-        p_Remainder = i_Atomic_Number % 3;
-        //emit buildModelStatusMessage("Number of protons == Odd");
-        emit buildModelStatusMessage("The number of hexagons that can be built with the provided number of protons is: " + QString::number(p_NumOfHexCanBeBuilt));
-        emit buildModelStatusMessage("The leftover number of protons is: " + QString::number(p_Remainder));
-    }
-    else if(oddNumberProtons == false){
-        p_NumOfHexCanBeBuilt = i_Atomic_Number / 3;
-        p_Remainder = i_Atomic_Number % 3;
-        //emit buildModelStatusMessage("Number of protons == Even");
-        emit buildModelStatusMessage("The number of hexagons that can be built with the provided number of protons is: " + QString::number(p_NumOfHexCanBeBuilt));
-        emit buildModelStatusMessage("The leftover number of protons is: " + QString::number(p_Remainder));
-    }
+    //Find the number of hex halves that can be built ith the given number of protons
+    p_NumHexHalvesCanBeBuilt = i_Atomic_Number / 3;
+    p_Remainder = i_Atomic_Number % 3;
+    emit buildModelStatusMessage("The number of hexagon halves that can be built with the provided number of protons is: " + QString::number(p_NumHexHalvesCanBeBuilt));
+    emit buildModelStatusMessage("The leftover number of protons is: " + QString::number(p_Remainder));
 
-    if(oddNumberNeutrons == true){
-        n_NumOfHexCanBeBuilt = i_numOfNeutrons / 3;
-        n_Remainder = i_numOfNeutrons % 3;
-        //emit buildModelStatusMessage("Number of neutrons == Odd");
-        emit buildModelStatusMessage("The number of hexagons that can be built with the provided number of neutrons is: " + QString::number(n_NumOfHexCanBeBuilt));
-        emit buildModelStatusMessage("The leftover number of neutrons is: " + QString::number(n_Remainder));
-    }
-    else if(oddNumberNeutrons == false){
-        n_NumOfHexCanBeBuilt = i_numOfNeutrons / 3;
-        n_Remainder = i_numOfNeutrons % 3;
-       // emit buildModelStatusMessage("Number of neutrons = Even");
-        emit buildModelStatusMessage("The number of hexagons that can be built with the provided number of neutrons is: " + QString::number(n_NumOfHexCanBeBuilt));
-        emit buildModelStatusMessage("The leftover number of neutrons is: " + QString::number(n_Remainder));
-    }
+    //Find the number of hex halves that can be built ith the given number of neutrons
+    n_NumHexHalvesCanBeBuilt = i_numOfNeutrons / 3;
+    n_Remainder = i_numOfNeutrons % 3;
+    emit buildModelStatusMessage("The number of hexagon halves that can be built with the provided number of neutrons is: " + QString::number(n_NumHexHalvesCanBeBuilt));
+    emit buildModelStatusMessage("The leftover number of neutrons is: " + QString::number(n_Remainder));
 
-    if(n_NumOfHexCanBeBuilt == p_NumOfHexCanBeBuilt){
-        m_NumOfHexToBuild = n_NumOfHexCanBeBuilt;
-        emit buildModelStatusMessage("An equal amount of haxagons can be built for protons and neutrons");
-    }
-    else if(n_NumOfHexCanBeBuilt != p_NumOfHexCanBeBuilt){
-        if(n_NumOfHexCanBeBuilt > p_NumOfHexCanBeBuilt){
-            int temp = n_NumOfHexCanBeBuilt - p_NumOfHexCanBeBuilt;
-            m_NumOfHexToBuild = n_NumOfHexCanBeBuilt - p_NumOfHexCanBeBuilt;
-            emit buildModelStatusMessage("The number of extra neutron hexagons that can be built is: " + QString::number(temp / 3));
+     //Hex case 1: No hexagon halves can be built
+    if(p_NumHexHalvesCanBeBuilt == 0 && n_NumHexHalvesCanBeBuilt == 0){
 
-        }
-        else if(n_NumOfHexCanBeBuilt < p_NumOfHexCanBeBuilt){
-            int temp = p_NumOfHexCanBeBuilt - n_NumOfHexCanBeBuilt;
-            m_NumOfHexToBuild = p_NumOfHexCanBeBuilt - n_NumOfHexCanBeBuilt;
-            emit buildModelStatusMessage("The number of extra proton hexagons that can be built is: " + QString::number(temp / 3));
-        }
     }
+    //Hex Case 2: Hexagon halves can be built
     else{
-        //Do nothing for now
+         //2.1: An equal number of hexagon halves can be built
+         if(n_NumHexHalvesCanBeBuilt == p_NumHexHalvesCanBeBuilt){
+             m_NumOfHexToBuild = n_NumHexHalvesCanBeBuilt;
+             emit buildModelStatusMessage("An equal amount of haxagons can be built for protons and neutrons");
+         }
+
+         //2.2: An unequal number of hexagon halves can be built
+         else if(n_NumHexHalvesCanBeBuilt != p_NumHexHalvesCanBeBuilt){
+
+             //2.2.1 More neutron halves than proton halves can be built
+             if(n_NumHexHalvesCanBeBuilt > p_NumHexHalvesCanBeBuilt){
+
+                 //Find the difference
+                 int t_Difference = n_NumHexHalvesCanBeBuilt - p_NumHexHalvesCanBeBuilt;
+                 m_NumOfHexToBuild = n_NumHexHalvesCanBeBuilt - t_Difference;
+
+                 //Add the remaining neutrons to the remainder from the first calculation
+                 n_Remainder += t_Difference * 3;
+
+                 emit buildModelStatusMessage("Num of hex to build: " + QString::number(m_NumOfHexToBuild));
+                 emit buildModelStatusMessage("Neutrons remaining: " + QString::number(n_Remainder));
+                 emit buildModelStatusMessage("Protons remaining: " + QString::number(p_Remainder));
+             }
+             //2.2.2 More proton halves than neutron halves can be built
+             else if(n_NumHexHalvesCanBeBuilt < p_NumHexHalvesCanBeBuilt){
+
+                 //Find the difference
+                 int t_Difference = p_NumHexHalvesCanBeBuilt - n_NumHexHalvesCanBeBuilt;
+                 m_NumOfHexToBuild = p_NumHexHalvesCanBeBuilt - t_Difference;
+
+                 //Add the remaining neutrons to the remainder from the first calculation
+                 p_Remainder += t_Difference * 3;
+
+                 emit buildModelStatusMessage("Num of hex to build: " + QString::number(m_NumOfHexToBuild));
+                 emit buildModelStatusMessage("Neutrons remaining: " + QString::number(n_Remainder));
+                 emit buildModelStatusMessage("Protons remaining: " + QString::number(p_Remainder));
+             }
+         }
+         else{
+             //Do nothing for now
+         }
+
+         //build each ring that can be built. This may need a separate function
+         while(m_NumOfHexToBuild > 0){
+             ModelStepsCounter++;
+             m_Step = QString::number(ModelStepsCounter) + "\n";
+             spinSwitch = !spinSwitch;
+             if(spinSwitch == true){
+                 m_Spin = "up\n";
+             }
+             else if(spinSwitch == false){
+                 m_Spin = "down\n";
+             }
+             if(m_Spin == "up\n"){
+                 x1 = "P\n";
+                 x2 = "N\n";
+                 x3 = "P\n";
+                 x4 = "N\n";
+                 x5 = "P\n";
+                 x6 = "N\n";
+                 saveModelBuildDataToFile(m_Step, m_Spin, x1, x2, x3, x4, x5, x6);
+             }
+             else if(m_Spin == "down\n"){
+                 x1 = "N\n";
+                 x2 = "P\n";
+                 x3 = "N\n";
+                 x4 = "P\n";
+                 x5 = "N\n";
+                 x6 = "P\n";
+                 saveModelBuildDataToFile(m_Step, m_Spin, x1, x2, x3, x4, x5, x6);
+             }
+             m_NumOfHexToBuild--;
+         }
     }
 
-    //build each ring that can be built
-    while(m_NumOfHexToBuild > 0){
-        ModelStepsCounter++;
-        m_Step = QString::number(ModelStepsCounter) + "\n";
-        spinSwitch = !spinSwitch;
-        if(spinSwitch == true){
-            m_Spin = "up\n";
-        }
-        else if(spinSwitch == false){
-            m_Spin = "down\n";
-        }
-        if(m_Spin == "up\n"){
-            x1 = "P\n";
-            x2 = "N\n";
-            x3 = "P\n";
-            x4 = "N\n";
-            x5 = "P\n";
-            x6 = "N\n";
-            saveModelBuildDataToFile(m_Step, m_Spin, x1, x2, x3, x4, x5, x6);
-        }
-        else if(m_Spin == "down\n"){
-            x1 = "N\n";
-            x2 = "P\n";
-            x3 = "N\n";
-            x4 = "P\n";
-            x5 = "N\n";
-            x6 = "P\n";
-            saveModelBuildDataToFile(m_Step, m_Spin, x1, x2, x3, x4, x5, x6);
-        }
-            m_NumOfHexToBuild--;
-    }
 
     //QDateTime f_DateTime = dateTime.currentDateTime();
     QString f_DateTimeString = dateTime.toString("yyyy-MM-dd h:mm:ss ap");
     emit buildModelStatusMessage("Build model process completed @: " + f_DateTimeString);
 }
 
+//Save the model build data to file
 void MainController::saveModelBuildDataToFile(QString _Step, QString _Spin, QString X1, QString X2, QString X3, QString X4, QString X5, QString X6){
 
     if(!QDir("C:/Newclides/models/" + identifiedNuclide + "_" + QString::number(i_massNum)).exists()){
         QDir().mkdir("C:/Newclides/models/" + identifiedNuclide + "_" + QString::number(i_massNum));
     }
-    /*
-    if(!QDir(resultsPath + selectedDbName + "\\" + scanMethod + "\\").exists()){
-        QDir().mkdir(resultsPath + selectedDbName + "\\" + scanMethod + "\\");
-    }
-    */
+
     QString basePath = "C:/Newclides/models/" + identifiedNuclide + "_" + QString::number(i_massNum);
     QDateTime dateTimeF = dateTimeF.currentDateTime();
     QString dateTimeStringF = dateTimeF.toString("yyyy-MM-dd_h_mm_ss_ap");
     QString filename = basePath + "\\" + identifiedNuclide + "_" + QString::number(i_massNum) + "_" + "Step_" + QString::number(ModelStepsCounter) + "_" + dateTimeStringF + ".txt";
-    //emit dataFileName2QML(selectedDbName + "_"  + dateTimeStringF +  ".txt");
     QFile file(filename);
     if (file.open(QIODevice::ReadWrite)) {
         QTextStream stream(&file);
@@ -181,6 +163,7 @@ void MainController::saveModelBuildDataToFile(QString _Step, QString _Spin, QStr
     file.close();
 }
 
+//Initial loader for model file data
 void MainController::loadModelData(QString dataLocation){
     QString t_FilePath = "";
     QString t_FileName = "";
@@ -221,8 +204,6 @@ void MainController::loadModelData(QString dataLocation){
     }
     QTextStream in(&sFile);
     while (!in.atEnd()){
-        //openFileForView = in.readAll().trimmed();
-        //qDebug() << "The model file line data is: " + in.readLine().trimmed();
         QString tempLineRead = in.readLine().trimmed();
         //emit step number
         if(fileLineCounter == 0){
@@ -256,6 +237,7 @@ void MainController::loadModelData(QString dataLocation){
     fileLineCounter = 0;
 }
 
+//Function to traverse/change the model data after the initial file has been loaded
 void MainController::modelViewerStepControl(QString stepNum, QString direction){
 
     int tempInt = stepNum.toInt() - 1;
@@ -273,17 +255,13 @@ void MainController::modelViewerStepControl(QString stepNum, QString direction){
     }
     QTextStream in(&sFile);
     while (!in.atEnd()){
-        //openFileForView = in.readAll().trimmed();
-        //qDebug() << "The model file line data is: " + in.readLine().trimmed();
         QString tempLineRead = in.readLine().trimmed();
-        //qDebug() << "The line read data is: " + in.readLine().trimmed();
         //emit step number
         if(fileLineCounter == 0){
            emit modelStepNumber(tempLineRead);
         }
         //emit spin
         else if(fileLineCounter == 1){
-           //qDebug() <<"Emitting new model data................";
            emit modelStepSpin(tempLineRead);
         }
         else if(fileLineCounter == 2){

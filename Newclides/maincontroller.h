@@ -56,10 +56,10 @@ private:
 
     int i_Count = 117;
 
-    int p_NumOfHexCanBeBuilt = 0;
+    int p_NumHexHalvesCanBeBuilt = 0;
     int p_Remainder = 0;
 
-    int n_NumOfHexCanBeBuilt = 0;
+    int n_NumHexHalvesCanBeBuilt = 0;
     int n_Remainder = 0;
 
     //bool nuclideFound = false;
@@ -69,10 +69,12 @@ private:
 
     //build model variables
     int m_NumOfHexToBuild = 0;
-    int remainderNeutrons = 0;
-    int remainderProtons = 0;
+    int remainderNeutronHalves = 0;
+    int remainderProtonHalves = 0;
     int ModelStepsCounter = 0;
     int fileLineCounter = 0;
+
+
 
     QString selectedFile = "";
     QString m_Step = "";
