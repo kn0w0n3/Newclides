@@ -3,9 +3,7 @@ Nuclide Modeling - Nuclear Physics
 
 ![newclides_gui_9-12-23_4MB](https://github.com/kn0w0n3/Newclides/assets/22214754/2b1c8159-e4b3-4bd2-be87-9616d96f3281)      
 
-![1](https://github.com/kn0w0n3/Newclides/assets/22214754/a3beba4c-b2a5-4e0c-916f-bf3a3b0fbc71)  
-
-![2](https://github.com/kn0w0n3/Newclides/assets/22214754/d0921f56-dc7b-4ed4-94c1-a819323d82e2)   
+![li6-3d_9-16-23](https://github.com/kn0w0n3/Newclides/assets/22214754/91b52bf2-9f80-4f3f-9a7f-9af5ff44ff4a)    
 
 Newclides: A new way to model the the nucleus...  
 
